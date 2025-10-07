@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE WORLD OF COMPUTER</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* AI Computer Background */
+        .ai-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 50%, #000428 100%);
+            overflow: hidden;
+        }
+
+        .ai-grid {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 204, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 204, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .floating-circuits {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .circuit {
+            position: absolute;
+            border: 2px solid #00ffcc;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        .circuit:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .circuit:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 70%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .circuit:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            left: 30%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, rgba(0, 255, 204, 0.1), rgba(255, 0, 255, 0.1));
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #00ffcc;
+            box-shadow: 0 4px 20px rgba(0, 255, 204, 0.3);
+        }
+
+        .creator-tag {
+            text-align: center;
+            font-size: 18px;
+            color: #00ff88;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px #00ff88; }
+            50% { text-shadow: 0 0 20px #00ff88, 0 0 30px #00ff88; }
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #00ffcc, #ff00ff);
+            border: none;
+            color: #0a0a0a;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.5);
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #00ff88, #00ffcc);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        /* Social Icons */
+        .social-icons {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 999;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(20, 20, 30, 0.9);
+            border: 2px solid #00ffcc;
+            border-radius: 50%;
+            color: #00ffcc;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: #00ffcc;
+            color: #0a0a0a;
+            transform: scale(1.2) rotate(360deg);
+            box-shadow: 0 0 20px #00ffcc;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 120px;
+            padding: 40px 20px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(20, 20, 30, 0.9);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00ffcc, #ff00ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            color: #b0b0b0;
+        }
+
+        /* Content Cards */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: rgba(20, 20, 30, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(0, 255, 204, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 204, 0.3);
+            border-color: #00ffcc;
+        }
+
+        .card-icon {
+            font-size: 3em;
+            color: #00ffcc;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            color: #00ff88;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .card p {
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+            background: rgba(20, 20, 30, 0.9);
+            border-top: 2px solid #00ffcc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .social-icons {
+                bottom: 20px;
+                right: 50%;
+                top: auto;
+                transform: translateX(50%);
+                flex-direction: row;
+            }
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .nav-tab {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+
+        /* Skip to content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #00ffcc;
+            color: #0a0a0a;
+            padding: 8px;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- AI Computer Background -->
+    <div class="ai-background" aria-hidden="true">
+        <div class="ai-grid"></div>
+        <div class="floating-circuits">
+            <div class="circuit"></div>
+            <div class="circuit"></div>
+            <div class="circuit"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="creator-tag">CREATED BY: MUHAMMAD ABDULLAH</div>
+        <nav role="navigation" aria-label="Main navigation">
+            <button class="nav-tab active" onclick="showPage('home')" aria-current="page" aria-controls="home-page">
+                <i class="fas fa-home" aria-hidden="true"></i> Home
+            </button>
+            <button class="nav-tab" onclick="showPage('history')" aria-controls="history-page">
+                <i class="fas fa-history" aria-hidden="true"></i> History
+            </button>
+            <button class="nav-tab" onclick="showPage('components')" aria-controls="components-page">
+                <i class="fas fa-microchip" aria-hidden="true"></i> Components
+            </button>
+            <button class="nav-tab" onclick="showPage('programming')" aria-controls="programming-page">
+                <i class="fas fa-code" aria-hidden="true"></i> Programming
+            </button>
+            <button class="nav-tab" onclick="showPage('ai')" aria-controls="ai-page">
+                <i class="fas fa-robot" aria-hidden="true"></i> AI & Future
+            </button>
+        </nav>
+    </header>
+
+    <!-- Social Icons for Related Info -->
+    <div class="social-icons" role="complementary" aria-label="External links">
+        <a href="https://github.com" target="_blank" class="social-icon" title="GitHub" aria-label="GitHub">
+            <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+        <a href="https://stackoverflow.com" target="_blank" class="social-icon" title="Stack Overflow" aria-label="Stack Overflow">
+            <i class="fab fa-stack-overflow" aria-hidden="true"></i>
+        </a>
+        <a href="https://linkedin.com" target="_blank" class="social-icon" title="LinkedIn" aria-label="LinkedIn">
+            <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+        <a href="https://youtube.com" target="_blank" class="social-icon" title="YouTube" aria-label="YouTube">
+            <i class="fab fa-youtube" aria-hidden="true"></i>
+        </a>
+        <a href="https://wikipedia.org" target="_blank" class="social-icon" title="Wikipedia" aria-label="Wikipedia">
+            <i class="fab fa-wikipedia-w" aria-hidden="true"></i>
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Home Page -->
+        <section id="home" class="page active" aria-labelledby="home-title">
+            <div class="hero">
+                <h1 id="home-title">THE WORLD OF COMPUTER</h1>
+                <p>Exploring the Digital Universe: From Binary to AI</p>
+            </div>
+
+            <div class="content-grid">
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-desktop" aria-hidden="true"></i></div>
+                    <h3>What is a Computer?</h3>
+                    <p>A computer is an electronic device that processes data according to instructions, performing arithmetic and logical operations at incredible speeds.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-microchip" aria-hidden="true"></i></div>
+                    <h3>Digital Revolution</h3>
+                    <p>The digital age has transformed every aspect of human life. Computers power our communication, entertainment, education, and healthcare.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-brain" aria-hidden="true"></i></div>
+                    <h3>Artificial Intelligence</h3>
+                    <p>AI represents the frontier of computing, where machines learn, reason, and make decisions. From neural networks to deep learning.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-network-wired" aria-hidden="true"></i></div>
+                    <h3>Internet & Connectivity</h3>
+                    <p>The internet connects billions of computers worldwide, creating an unprecedented network of information exchange.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-shield-alt" aria-hidden="true"></i></div>
+                    <h3>Cybersecurity</h3>
+                    <p>As computers become central to our lives, protecting digital assets and privacy becomes crucial in the digital age.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-rocket" aria-hidden="true"></i></div>
+                    <h3>Future Computing</h3>
+                    <p>Quantum computing, neuromorphic chips, and biological computing promise to revolutionize computation beyond classical limits.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- History Page -->
+        <section id="history" class="page" aria-labelledby="history-title">
+            <div class="hero">
+                <h1 id="history-title">COMPUTER HISTORY</h1>
+                <p>The Evolution of Computing Machines</p>
+            </div>
+
+            <div class="content-grid">
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-calculator" aria-hidden="true"></i></div>
+                    <h3>1800s - Mechanical Era</h3>
+                    <p>Charles Babbage designs the Analytical Engine, considered the first general-purpose computer. Ada Lovelace writes the first algorithm.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-tv" aria-hidden="true"></i></div>
+                    <h3>1940s - Electronic Computers</h3>
+                    <p>ENIAC, the first electronic general-purpose computer, is built. Vacuum tubes enable high-speed calculations for military applications.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-microchip" aria-hidden="true"></i></div>
+                    <h3>1950s-60s - Transistor Revolution</h3>
+                    <p>Transistors replace vacuum tubes, making computers smaller, faster, and more reliable. IBM dominates the mainframe market.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-desktop" aria-hidden="true"></i></div>
+                    <h3>1970s - Personal Computing</h3>
+                    <p>Microprocessors lead to the first personal computers. Apple, Microsoft, and Commodore bring computing to homes and businesses.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-mouse" aria-hidden="true"></i></div>
+                    <h3>1980s-90s - GUI & Internet</h3>
+                    <p>Graphical User Interfaces make computers user-friendly. The World Wide Web connects computers globally, revolutionizing information access.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-mobile-alt" aria-hidden="true"></i></div>
+                    <h3>2000s-Present - Mobile & AI</h3>
+                    <p>Smartphones put computers in everyone's pocket. Cloud computing and artificial intelligence transform how we interact with technology.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Components Page -->
+        <section id="components" class="page" aria-labelledby="components-title">
+            <div class="hero">
+                <h1 id="components-title">COMPUTER COMPONENTS</h1>
+                <p>The Building Blocks of Digital Systems</p>
+            </div>
+
+            <div class="content-grid">
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-microchip" aria-hidden="true"></i></div>
+                    <h3>CPU</h3>
+                    <p>Central Processing Unit - The brain of the computer that executes instructions and performs calculations.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-memory" aria-hidden="true"></i></div>
+                    <h3>RAM</h3>
+                    <p>Random Access Memory - Temporary storage for active processes and data that the CPU needs to access quickly.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-hdd" aria-hidden="true"></i></div>
+                    <h3>Storage</h3>
+                    <p>Hard drives and SSDs for permanent data storage, retaining information even when the power is off.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-tv" aria-hidden="true"></i></div>
+                    <h3>GPU</h3>
+                    <p>Graphics Processing Unit - Specialized processor for rendering images, videos, and animations.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-motherboard" aria-hidden="true"></i></div>
+                    <h3>Motherboard</h3>
+                    <p>Main circuit board connecting all components, allowing them to communicate with each other.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-bolt" aria-hidden="true"></i></div>
+                    <h3>PSU</h3>
+                    <p>Power Supply Unit - Converts AC power from the wall to DC power that computer components can use.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Programming Page -->
+        <section id="programming" class="page" aria-labelledby="programming-title">
+            <div class="hero">
+                <h1 id="programming-title">PROGRAMMING LANGUAGES</h1>
+                <p>The Art of Instructing Computers</p>
+            </div>
+
+            <div class="content-grid">
+                <article class="card">
+                    <div class="card-icon"><i class="fab fa-python" aria-hidden="true"></i></div>
+                    <h3>Python</h3>
+                    <p>High-level, versatile language perfect for AI, data science, web development, and automation. Known for its simple syntax.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fab fa-js" aria-hidden="true"></i></div>
+                    <h3>JavaScript</h3>
+                    <p>The language of the web. Powers interactive websites, server-side applications (Node.js), and mobile apps.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fab fa-java" aria-hidden="true"></i></div>
+                    <h3>Java</h3>
+                    <p>Platform-independent language used in enterprise applications, Android development, and large-scale systems.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-code" aria-hidden="true"></i></div>
+                    <h3>C++</h3>
+                    <p>High-performance language for system programming, game development, and applications requiring maximum speed.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fab fa-react" aria-hidden="true"></i></div>
+                    <h3>React/Vue/Angular</h3>
+                    <p>Modern JavaScript frameworks for building dynamic user interfaces and single-page applications.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-database" aria-hidden="true"></i></div>
+                    <h3>SQL</h3>
+                    <p>Structured Query Language for managing and manipulating databases. Essential for data-driven applications.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- AI & Future Page -->
+        <section id="ai" class="page" aria-labelledby="ai-title">
+            <div class="hero">
+                <h1 id="ai-title">AI & THE FUTURE</h1>
+                <p>Artificial Intelligence and Tomorrow's Computing</p>
+            </div>
+
+            <div class="content-grid">
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-brain" aria-hidden="true"></i></div>
+                    <h3>Machine Learning</h3>
+                    <p>Algorithms that learn from data without explicit programming. Powers recommendation systems and predictive analytics.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-project-diagram" aria-hidden="true"></i></div>
+                    <h3>Neural Networks</h3>
+                    <p>Computing systems inspired by biological neural networks. Enable image recognition and natural language processing.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-atom" aria-hidden="true"></i></div>
+                    <h3>Quantum Computing</h3>
+                    <p>Revolutionary computing using quantum mechanics. Promises exponential speedup for certain problems.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-cloud" aria-hidden="true"></i></div>
+                    <h3>Cloud AI</h3>
+                    <p>AI services delivered via the cloud, making advanced AI accessible to everyone through APIs and platforms.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-robot" aria-hidden="true"></i></div>
+                    <h3>Autonomous Systems</h3>
+                    <p>Self-driving cars, drones, and robots that can operate independently. Combining computer vision and decision-making AI.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon"><i class="fas fa-dna" aria-hidden="true"></i></div>
+                    <h3>Bio-computing</h3>
+                    <p>Computing using biological molecules. DNA computing and synthetic biology could revolutionize information processing.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 THE WORLD OF COMPUTER | Created by Muhammad Abdullah</p>
+        <p>Exploring the Digital Frontier Together</p>
+    </footer>
+
+    <script>
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                tab.removeAttribute('aria-current');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Add active class to clicked tab
+            const activeTab = event.target.closest('.nav-tab');
+            activeTab.classList.add('active');
+            activeTab.setAttribute('aria-current', 'page');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
